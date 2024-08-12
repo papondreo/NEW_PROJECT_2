@@ -8,7 +8,8 @@ const axiosInstance = axios.create({
   },
 });
 
-let accessToken = '';
+// Получаем accessToken из localStorage
+let accessToken = localStorage.getItem('accessToken') || '';
 
 function setAccessToken(newToken) {
   accessToken = newToken;
@@ -35,6 +36,8 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+
 
 export { setAccessToken };
 

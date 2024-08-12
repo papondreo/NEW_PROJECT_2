@@ -6,12 +6,13 @@ import BookCard from '../ul/BookCard'
 export default function MainPage() {
     const[books,setBooks ] = useState([])
 
-    useEffect(()=>{
-        axios.get('/api/books')
-        .then(res=>{
-            setBooks(res.data)
-        });
-    })
+    useEffect(() => {
+      axios.get('/api/books')
+          .then(res => {
+              setBooks(res.data)
+          })
+          .catch(err => console.error('Error fetching books:', err));
+  }, []); // Пустой массив зависимостей предотвращает бесконечный цикл запросов
 
     const deleteHandler = (id) =>{
         axios.delete(`/api/books/${id}`)

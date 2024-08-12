@@ -1,15 +1,16 @@
 
 import { Link } from 'react-router-dom'
-import axios from 'axios';
+import axiosInstance from '../../../axiosInstance';
 import { useState } from 'react';
 
 export default function BookCard({book, deleteHandler}) {
-
+  console.log(book)
   const [likes, setLikes] = useState(book.likes); // Добавляем состояние для лайков
 
   const likeHandler = async () => {
     try {
-      const response = await axios.post(`/api/books/${book.id}/like`);
+      console.log(axiosInstance);
+      const response = await axiosInstance.post(`/books/${book.id}/like`);
       if (response.status === 201) {
         setLikes(prevLikes => prevLikes + 1); // Увеличиваем количество лайков на 1
       }
